@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import cv2
 import numpy as np
 from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D, BatchNormalization, Conv2DTranspose,Add
@@ -6,8 +5,6 @@ from tensorflow.keras.models import Model
 import matplotlib.pyplot as plt
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import tensorflow.keras
-
-
 
 wh = 100
 num = 300
@@ -124,38 +121,3 @@ epochs = range(1, len(his.history['loss'])+1)
 plt.plot(epochs, his.history['loss'],'-')  
 plt.title('Training Loss')
 plt.show()
-
-'''
-a = cv2.imread('bald_eagle//egle (600).jpg')
-a = cv2.cvtColor( a, cv2.COLOR_BGR2RGB )
-a = cv2.resize(a,(wh,wh))
-test = np.zeros((1,wh,wh,3))
-test[0] = a
-
-l,ab = rgb2lab(test,1,wh,wh)
-
-testL = np.zeros((1,wh,wh,1))
-testL[0] = l
-
-x = model.predict(testL)
-
-org = np.zeros((1,wh,wh,3))
-
-org[:,:,:,:1] = l
-org[:,:,:,1:] = x
-
-org = org.astype('float32')
-t = cv2.cvtColor( org[0], cv2.COLOR_LAB2RGB )
-
-plt.figure(figsize=(10, 5))
-ax = plt.subplot(1, 2, 1)
-plt.imshow(t.reshape(wh,wh,3))
-ax.get_xaxis().set_visible(False)
-ax.get_yaxis().set_visible(False)
-
-
-ax = plt.subplot(1, 2, 2)
-plt.imshow(a.reshape(wh,wh,3))
-ax.get_xaxis().set_visible(False)
-ax.get_yaxis().set_visible(False)
-'''
